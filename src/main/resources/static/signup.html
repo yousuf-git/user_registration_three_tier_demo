@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Signup favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1077/1077012.png">
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+    <main class="registration-container">
+        <form class="registration-form">
+            <h1>Registration Form</h1>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">First name *</label>
+                    <input type="text" name="firstName" id="firstName" class="form-input" placeholder="Muhammad" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last name *</label>
+                    <input type="text" name="lastName" id="lastName" class="form-input" placeholder="Yousuf" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email address *</label>
+                <input type="email" name="email" id="email" class="form-input" placeholder="yousuf@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password *</label>
+                <input type="password" name="password" id="password" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="addressLine1" class="form-label">Address line 1 *</label>
+                <input type="text" name="address" id="addressLine1" class="form-input" placeholder="Street name and number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="addressLine2" class="form-label">Address line 2</label>
+                <input type="text" id="addressLine2" class="form-input"
+                    placeholder="Apartment, suite, unit, etc. (optional)">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city" class="form-label">City *</label>
+                    <input type="text" name="city" id="city" class="form-input" placeholder="Multan" required>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="form-label">State/Province *</label>
+                    <input type="text" name="state" id="state" class="form-input" placeholder="Punjab" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="zipCode" class="form-label">Zip / Postal code *</label>
+                    <input type="text" name="zipCode" id="zipCode" class="form-input" placeholder="12345" required>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="form-label">Country *</label>
+                    <input type="text" name="country" name="country" id="country" class="form-input" placeholder="Pakistan" required>
+                </div>
+            </div>
+            <!-- Terms and conditions box -->
+            <div class="form-group">
+                <input type="checkbox" id="termsAndConditions" required>
+                <label for="termsAndConditions">I agree to the terms and conditions</label>
+            </div>
+
+            <button type="submit" class="submit-button">Sign Up</button>
+        </form>
+    </main>
+    <script>
+        // Get all the data from the form fields, convert it to JSON, and send to /signup endpoint
+        document.querySelector('.registration-form').addEventListener('submit', async (e) => {
+            e.preventDefault();     // Prevent the default form submission behavior
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                // if key is confirm password, then skip it
+                if (key !== 'confirmPassword') {
+                    data[key] = value
+                }
+            }
+            );
+            jsonData = JSON.stringify(data)
+            console.log(jsonData)
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+            if (response.ok) {
+                alert('User signed up successfully');
+                window.location.href = '/login';        // go to login page
+            } else if (response.status === 405) {
+                alert('Server not running or endpoint not found');
+            } 
+            
+            else {
+                alert('Failed to sign up user ', response.body);
+            }
+        });
+    </script>
+</body>
+
+</html>

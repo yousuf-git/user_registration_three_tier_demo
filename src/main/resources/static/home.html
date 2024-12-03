@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/home-icon.png">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D7D3BF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            /* border: 1px solid #555; */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(165, 157, 132, 0.9);
+            padding: 20px;
+            max-width: 70%;
+            width: 100%;
+            text-align: left;
+            /* Explanation of shadow */
+            /* The first value (0) is the horizontal offset of the shadow. */
+            /* The second value (4px) is the vertical offset. */
+            /* The third value (8px) is the blur radius. */
+            /* The shadow color is set to black with a 80% opacity. */
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 10px 0;
+            color: #3f3f3f;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Welcome Back</p>
+    <h1 id="firstName">Muhammad</h1>
+    <div class="card">
+        <h2>Your Profile</h2>
+        <hr>
+        <p><strong>Full Name:</strong> <span id="fullName"> M. Yousuf</span></p>
+        <p><strong>Email:</strong> <span id="email">yousuf@gmail.com</span></p>
+        <p><strong>Address:</strong> <span id="address">Street name and number</span></p>
+        <!-- city -->
+        <p><strong>City:</strong> <span id="city">Multan</span></p>
+        <!-- state/province -->
+        <p><strong>State/Province:</strong> <span id="state">Punjab</span></p>
+        <!-- country -->
+        <p><strong>Country:</strong> <span id="country">Pakistan</span></p>
+
+    </div>
+    <!-- Logout button -->
+
+    <script>
+        // I'm Assuming that user data is available in localStorage after signup
+        document.getElementById('firstName').textContent = localStorage.getItem('firstName');
+        document.getElementById('fullName').textContent = localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName');
+        document.getElementById('email').textContent = localStorage.getItem('email');
+        document.getElementById('address').textContent = localStorage.getItem('address');
+        document.getElementById('city').textContent = localStorage.getItem('city');
+        document.getElementById('state').textContent = localStorage.getItem('state');
+        document.getElementById('country').textContent = localStorage.getItem('country');
+    </script>
+</body>
+
+</html>
